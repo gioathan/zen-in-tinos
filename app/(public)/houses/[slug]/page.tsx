@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -135,7 +135,7 @@ export default async function HouseDetailPage({ params }: Props) {
             <div className="lg:col-span-2">
               {/* Title and Location */}
               <div className="mb-6">
-                <h1 className="text-4xl font-bold text-[#78D7E0] mb-2">
+                <h1 className="text-4xl font-bold text-[#1A6B9A] mb-2">
                   {house.title}
                 </h1>
                 {house.location_area && (
@@ -181,7 +181,7 @@ export default async function HouseDetailPage({ params }: Props) {
 
               {/* Description */}
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-[#78D7E0] mb-4">About this property</h2>
+                <h2 className="text-2xl font-bold text-[#1A6B9A] mb-4">About this property</h2>
                 <p className="text-gray-700 leading-relaxed whitespace-pre-line">
                   {house.description}
                 </p>
@@ -190,11 +190,11 @@ export default async function HouseDetailPage({ params }: Props) {
               {/* Amenities */}
               {amenities.length > 0 && (
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-[#78D7E0] mb-4">Amenities</h2>
+                  <h2 className="text-2xl font-bold text-[#1A6B9A] mb-4">Amenities</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {amenities.map((amenity: any) => (
                       <div key={amenity.id} className="flex items-center gap-3 text-gray-700">
-                        <svg className="w-5 h-5 text-[#78D7E0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-[#1A6B9A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                         {amenity.name}
@@ -207,14 +207,14 @@ export default async function HouseDetailPage({ params }: Props) {
               {/* Location */}
               {house.location_address && (
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-[#78D7E0] mb-4">Location</h2>
+                  <h2 className="text-2xl font-bold text-[#1A6B9A] mb-4">Location</h2>
                   <p className="text-gray-700 mb-4">{house.location_address}</p>
                   {house.google_maps_url && (
                     <a
                       href={house.google_maps_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-[#78D7E0] hover:text-[#D9D2C8] font-medium"
+                      className="inline-flex items-center gap-2 text-[#1A6B9A] hover:text-[#C4704A] font-medium"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -229,10 +229,10 @@ export default async function HouseDetailPage({ params }: Props) {
 
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <div className="sticky top-24 bg-[#FBEEC1] rounded-lg p-6 shadow-lg">
+              <div className="sticky top-24 bg-[#F7F3EE] rounded-lg p-6 shadow-lg">
                 {house.price_per_night && (
                   <div className="mb-6">
-                    <span className="text-3xl font-bold text-[#78D7E0]">
+                    <span className="text-3xl font-bold text-[#1A6B9A]">
                       €{house.price_per_night}
                     </span>
                     <span className="text-gray-600"> / night</span>
@@ -244,7 +244,7 @@ export default async function HouseDetailPage({ params }: Props) {
 
                 <Link
                   href="/contact"
-                  className="block w-full bg-[#78D7E0] text-black text-center py-3 rounded-lg font-semibold hover:bg-[#D9D2C8] transition-all mb-4"
+                  className="block w-full bg-[#1A6B9A] text-white text-center py-3 rounded-lg font-semibold hover:bg-[#C4704A] transition-all mb-4"
                 >
                   Contact Us
                 </Link>
@@ -260,11 +260,11 @@ export default async function HouseDetailPage({ params }: Props) {
       </section>
 
       {/* Back to Houses */}
-      <section className="py-8 bg-[#FBEEC1]">
+      <section className="py-8 bg-[#F7F3EE]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Link
             href="/houses"
-            className="inline-flex items-center gap-2 text-[#78D7E0] hover:text-[#D9D2C8] font-medium"
+            className="inline-flex items-center gap-2 text-[#1A6B9A] hover:text-[#C4704A] font-medium"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 export const metadata = {
   title: "Our Houses | Zen in Tinos",
@@ -19,9 +19,9 @@ export default async function HousesPage() {
     .order("display_order", { ascending: true });
 
   return (
-    <div className="min-h-screen bg-[#FBEEC1]">
+    <div className="min-h-screen bg-[#F7F3EE]">
       {/* Header Section */}
-      <section className="relative h-64 bg-[#78D7E0]">
+      <section className="relative h-64 bg-[#1A6B9A]">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Houses</h1>
@@ -52,13 +52,13 @@ export default async function HousesPage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     {house.is_featured && (
-                      <div className="absolute top-4 right-4 bg-[#D9D2C8] text-[#78D7E0] px-3 py-1 rounded-full text-sm font-semibold">
+                      <div className="absolute top-4 right-4 bg-white text-[#1A6B9A] px-3 py-1 rounded-full text-sm font-semibold">
                         Featured
                       </div>
                     )}
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-[#78D7E0] mb-2 group-hover:text-[#D9D2C8] transition">
+                    <h3 className="text-xl font-bold text-[#1A6B9A] mb-2 group-hover:text-[#C4704A] transition">
                       {house.title}
                     </h3>
                     <p className="text-gray-600 text-sm mb-4 flex items-center gap-2">
@@ -93,7 +93,7 @@ export default async function HousesPage() {
                     </div>
                     {house.price_per_night && (
                       <div className="pt-4 border-t border-gray-200">
-                        <span className="text-2xl font-bold text-[#78D7E0]">
+                        <span className="text-2xl font-bold text-[#1A6B9A]">
                           €{house.price_per_night}
                         </span>
                         <span className="text-gray-600"> / night</span>
@@ -112,7 +112,7 @@ export default async function HousesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-[#78D7E0] text-white">
+      <section className="py-16 bg-[#1A6B9A] text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Can't Find What You're Looking For?</h2>
           <p className="text-xl mb-8 text-gray-100">
@@ -120,7 +120,7 @@ export default async function HousesPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block bg-[#D9D2C8] text-[#000] px-8 py-3 rounded-full text-lg font-semibold hover:bg-white transition-all"
+            className="inline-block bg-white text-[#1A6B9A] px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#D4B896] hover:text-white transition-all"
           >
             Get in Touch
           </Link>

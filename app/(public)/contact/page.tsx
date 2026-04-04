@@ -87,7 +87,7 @@ export default function ContactPage() {
 
       <div className="min-h-screen bg-white">
         {/* Header Section */}
-        <section className="relative h-64 bg-[#78D7E0]">
+        <section className="relative h-64 bg-[#1A6B9A]">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white px-4">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
@@ -99,12 +99,12 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Section */}
-        <section className="py-20 bg-[#FBEEC1]">
+        <section className="py-20 bg-[#F7F3EE]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Information */}
               <div>
-                <h2 className="text-3xl font-bold text-[#78D7E0] mb-6">
+                <h2 className="text-3xl font-bold text-[#1A6B9A] mb-6">
                   Contact Information
                 </h2>
                 <p className="text-gray-700 mb-8 leading-relaxed">
@@ -114,14 +114,14 @@ export default function ContactPage() {
                 <div className="space-y-6">
                   {settings.contact_email && (
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-[#78D7E0] rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-[#1A6B9A] rounded-full flex items-center justify-center flex-shrink-0">
                         <Mail className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-[#78D7E0] mb-1">Email</h3>
+                        <h3 className="font-semibold text-[#1A6B9A] mb-1">Email</h3>
                         <a
                           href={`mailto:${settings.contact_email}`}
-                          className="text-gray-700 hover:text-[#D9D2C8] transition"
+                          className="text-gray-700 hover:text-[#C4704A] transition"
                         >
                           {settings.contact_email}
                         </a>
@@ -131,14 +131,14 @@ export default function ContactPage() {
 
                   {settings.contact_phone && (
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-[#78D7E0] rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-[#1A6B9A] rounded-full flex items-center justify-center flex-shrink-0">
                         <Phone className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-[#78D7E0] mb-1">Phone</h3>
+                        <h3 className="font-semibold text-[#1A6B9A] mb-1">Phone</h3>
                         <a
                           href={`tel:${settings.contact_phone}`}
-                          className="text-gray-700 hover:text-[#D9D2C8] transition"
+                          className="text-gray-700 hover:text-[#C4704A] transition"
                         >
                           {settings.contact_phone}
                         </a>
@@ -148,16 +148,16 @@ export default function ContactPage() {
 
                   {settings.whatsapp_number && (
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-[#78D7E0] rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-[#1A6B9A] rounded-full flex items-center justify-center flex-shrink-0">
                         <Phone className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-[#78D7E0] mb-1">WhatsApp</h3>
+                        <h3 className="font-semibold text-[#1A6B9A] mb-1">WhatsApp</h3>
                         <a
                           href={`https://wa.me/${settings.whatsapp_number.replace(/[^0-9]/g, '')}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-700 hover:text-[#D9D2C8] transition"
+                          className="text-gray-700 hover:text-[#C4704A] transition"
                         >
                           {settings.whatsapp_number}
                         </a>
@@ -166,11 +166,11 @@ export default function ContactPage() {
                   )}
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-[#78D7E0] rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-[#1A6B9A] rounded-full flex items-center justify-center flex-shrink-0">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-[#78D7E0] mb-1">Location</h3>
+                      <h3 className="font-semibold text-[#1A6B9A] mb-1">Location</h3>
                       <p className="text-gray-700">Tinos, Cyclades, Greece</p>
                     </div>
                   </div>
@@ -178,7 +178,7 @@ export default function ContactPage() {
 
                 {/* Business Hours */}
                 <div className="mt-8 p-6 bg-white rounded-lg shadow-md">
-                  <h3 className="font-semibold text-[#78D7E0] mb-3">Business Hours</h3>
+                  <h3 className="font-semibold text-[#1A6B9A] mb-3">Business Hours</h3>
                   <div className="space-y-2 text-gray-700">
                     <div className="flex justify-between">
                       <span>Monday - Friday</span>
@@ -198,7 +198,7 @@ export default function ContactPage() {
               {/* Contact Form */}
               <div>
                 <div className="bg-white rounded-lg shadow-lg p-8">
-                  <h2 className="text-3xl font-bold text-[#78D7E0] mb-6">
+                  <h2 className="text-3xl font-bold text-[#1A6B9A] mb-6">
                     Send us a Message
                   </h2>
 
@@ -233,7 +233,7 @@ export default function ContactPage() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#78D7E0] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A6B9A] focus:border-transparent"
                         placeholder="John Doe"
                       />
                     </div>
@@ -252,7 +252,7 @@ export default function ContactPage() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#78D7E0] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A6B9A] focus:border-transparent"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -270,7 +270,7 @@ export default function ContactPage() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#78D7E0] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A6B9A] focus:border-transparent"
                         placeholder="+30 123 456 7890"
                       />
                     </div>
@@ -289,7 +289,7 @@ export default function ContactPage() {
                         rows={6}
                         value={formData.message}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#78D7E0] focus:border-transparent resize-none"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A6B9A] focus:border-transparent resize-none"
                         placeholder="Tell us about your inquiry..."
                       />
                     </div>
@@ -297,7 +297,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={status === "sending"}
-                      className="w-full bg-[#78D7E0] text-black py-4 rounded-lg font-semibold hover:bg-[#D9D2C8] hover:text-[#000] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-[#1A6B9A] text-white py-4 rounded-lg font-semibold hover:bg-[#C4704A] hover:text-white transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {status === "sending" ? (
                         "Sending..."

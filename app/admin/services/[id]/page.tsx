@@ -3,6 +3,7 @@
 import { Card, message, Spin } from "antd";
 import { useParams, useRouter } from "next/navigation";
 import { supabaseClient } from "@/lib/supabase";
+import { adminFetch } from "@/lib/adminFetch";
 import ServiceForm from "../_components/ServiceForm";
 import { useEffect, useState } from "react";
 
@@ -21,43 +22,30 @@ export default function EditService() {
         .single();
 
       if (error) {
-        message.error('Failed to load service');
-        router.push('/admin/services');
+        message.error("Failed to load service");
+        router.push("/admin/services");
       } else {
         setService(data);
       }
       setLoading(false);
     }
-
     fetchService();
   }, [params.id, router]);
 
   const handleSubmit = async (values: any) => {
-    try {
-      const { error } = await supabaseClient
-        .from("services")
-        .update({
-          title: values.title,
-          description: values.description,
-          icon: values.icon,
-          image_url: values.image_url,
-          display_order: values.display_order || 0,
-          is_active: values.is_active !== false,
-        })
-        .eq("id", params.id);
-
-      if (error) throw error;
-
-      message.success('Service updated successfully');
-      router.push('/admin/services');
-    } catch (error: any) {
-      message.error(error.message || 'Failed to update service');
-    }
+    const res = await adminFetch(`/api/admin/services/${params.id}`, {
+      method: "PUT",
+      body: JSON.stringify(values),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Failed to update service");
+    message.success("Service updated successfully");
+    router.push("/admin/services");
   };
 
   if (loading) {
     return (
-      <div style={{ textAlign: 'center', padding: 50 }}>
+      <div style={{ textAlign: "center", padding: 50 }}>
         <Spin size="large" />
       </div>
     );

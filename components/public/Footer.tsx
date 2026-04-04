@@ -17,7 +17,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-[#78D7E0] text-white">
+    <footer className="bg-[#1A6B9A] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
@@ -31,22 +31,22 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/" className="text-gray-100 hover:text-[#D9D2C8] transition">
+                <Link href="/" className="text-gray-100 hover:text-[#D4B896] transition">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/houses" className="text-gray-100 hover:text-[#D9D2C8] transition">
+                <Link href="/houses" className="text-gray-100 hover:text-[#D4B896] transition">
                   Houses
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-gray-100 hover:text-[#D9D2C8] transition">
+                <Link href="/services" className="text-gray-100 hover:text-[#D4B896] transition">
                   Services
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-100 hover:text-[#D9D2C8] transition">
+                <Link href="/contact" className="text-gray-100 hover:text-[#D4B896] transition">
                   Contact
                 </Link>
               </li>
@@ -58,13 +58,13 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-gray-100">
                 <Mail size={16} />
-                <a href={`mailto:${settings.contact_email}`} className="hover:text-[#D9D2C8] transition">
+                <a href={`mailto:${settings.contact_email}`} className="hover:text-[#D4B896] transition">
                   {settings.contact_email || "info@tinoshomes.com"}
                 </a>
               </li>
               <li className="flex items-center gap-2 text-gray-100">
                 <Phone size={16} />
-                <a href={`tel:${settings.contact_phone}`} className="hover:text-[#D9D2C8] transition">
+                <a href={`tel:${settings.contact_phone}`} className="hover:text-[#D4B896] transition">
                   {settings.contact_phone || "+30 123 456 7890"}
                 </a>
               </li>
@@ -79,7 +79,7 @@ export default function Footer() {
                   href={settings.instagram_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#D9D2C8] transition"
+                  className="hover:text-[#D4B896] transition"
                 >
                   <Instagram size={24} />
                 </a>
@@ -89,7 +89,7 @@ export default function Footer() {
                   href={settings.facebook_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#D9D2C8] transition"
+                  className="hover:text-[#D4B896] transition"
                 >
                   <Facebook size={24} />
                 </a>

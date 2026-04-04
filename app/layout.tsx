@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Rammetto_One } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const rammetto = Rammetto_One({ subsets: ["latin"], weight: "400", variable: "--font-rammetto" });
 
 export const metadata: Metadata = {
   title: "Zen in Tinos",
@@ -34,7 +35,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${rammetto.variable} font-sans`}>
         {children}
       </body>
     </html>

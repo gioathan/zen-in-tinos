@@ -41,9 +41,9 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "bg-white shadow-md" 
-          : "bg-gradient-to-b from-black/50 to-transparent md:bg-gradient-to-b md:from-black/50 md:to-transparent bg-[#78D7E0]"
+        isScrolled
+          ? "bg-white shadow-md"
+          : "bg-gradient-to-b from-black/50 to-transparent md:bg-gradient-to-b md:from-black/50 md:to-transparent bg-[#1A6B9A]"
       }`}
     >
       {/* Hidden Google Translate Element */}
@@ -81,9 +81,9 @@ export default function Navbar() {
               <button
                 onClick={() => setShowLangMenu(!showLangMenu)}
                 className={`flex items-center gap-2 font-medium transition-colors ${
-                  isScrolled 
-                    ? "text-[#78D7E0] hover:text-[#D9D2C8]" 
-                    : "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-[#D9D2C8]"
+                  isScrolled
+                    ? "text-[#1A6B9A] hover:text-[#C4704A]"
+                    : "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-[#D4B896]"
                 }`}
               >
                 <Globe size={20} />
@@ -95,7 +95,7 @@ export default function Navbar() {
                     <button
                       key={lang.code}
                       onClick={() => handleLanguageChange(lang.code)}
-                      className="w-full px-4 py-2 text-left hover:bg-[#FBEEC1] transition flex items-center gap-3"
+                      className="w-full px-4 py-2 text-left hover:bg-[#F7F3EE] transition flex items-center gap-3"
                     >
                       <span className="text-2xl">{lang.flag}</span>
                       <span className="text-gray-700">{lang.name}</span>
@@ -119,8 +119,8 @@ export default function Navbar() {
               href="/houses"
               className={`font-medium transition-colors duration-300 ${
                 isScrolled 
-                    ? "text-[#78D7E0] hover:text-[#D9D2C8]" 
-                    : "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-[#D9D2C8]"
+                    ? "text-[#1A6B9A] hover:text-[#C4704A]"
+                    : "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-[#D4B896]"
               }`}
             >
               Houses
@@ -139,8 +139,8 @@ export default function Navbar() {
               href="/contact"
               className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
                 isScrolled
-                  ? "bg-[#78D7E0] text-[#000] hover:bg-[#D9D2C8] hover:text-[#000]"
-                  : "bg-[#D9D2C8] text-[#000] hover:bg-white shadow-lg hover:text-[#000]"
+                  ? "bg-[#1A6B9A] text-white hover:bg-[#C4704A] hover:text-white"
+                  : "bg-white text-[#1A6B9A] hover:bg-[#D4B896] hover:text-white shadow-lg"
               }`}
             >
               Contact
@@ -163,10 +163,10 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#78D7E0] border-t border-[#D9D2C8]">
+        <div className="md:hidden bg-[#1A6B9A] border-t border-[#4AAFC9]">
           <div className="px-4 py-6 space-y-4">
             {/* Language Selector Mobile */}
-            <div className="pb-4 border-b border-[#D9D2C8]">
+            <div className="pb-4 border-b border-[#4AAFC9]">
               <p className="text-white text-sm mb-2">Language:</p>
               <div className="grid grid-cols-2 gap-2">
                 {languages.map((lang) => (
@@ -184,28 +184,28 @@ export default function Navbar() {
 
             <Link
               href="/"
-              className="block text-white hover:text-[#D9D2C8] text-lg font-medium py-2"
+              className="block text-white hover:text-[#D4B896] text-lg font-medium py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/houses"
-              className="block text-white hover:text-[#D9D2C8] text-lg font-medium py-2"
+              className="block text-white hover:text-[#D4B896] text-lg font-medium py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Houses
             </Link>
             <Link
               href="/services"
-              className="block text-white hover:text-[#D9D2C8] text-lg font-medium py-2"
+              className="block text-white hover:text-[#D4B896] text-lg font-medium py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Services
             </Link>
             <Link
               href="/contact"
-              className="block text-white hover:text-[#D9D2C8] text-lg font-medium py-2"
+              className="block text-white hover:text-[#D4B896] text-lg font-medium py-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Contact

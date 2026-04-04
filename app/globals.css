@@ -13,13 +13,15 @@ body {
 }
 
 :root {
-  /* Frontend colors - updated palette */
-  --tan: #D9D2C8;           /* Changed to gray */
-  --dark-green: #78D7E0;    /* Changed to turquoise */
-  --cream: #FBEEC1;         /* Changed to light cream */
+  /* Frontend colors - Cyclades / Greek island palette */
+  --aegean: #1A6B9A;        /* Deep Aegean sea blue — primary */
+  --sea: #4AAFC9;           /* Bright Mediterranean water — secondary */
+  --terracotta: #C4704A;    /* Sunset / roof tiles — accent / CTA */
+  --sand: #D4B896;          /* Beach sand — hover / soft accents */
+  --whitewash: #F7F3EE;     /* Whitewashed Cycladic walls — backgrounds */
   --white: #FFFFFF;
-  --text-dark: #1a1a1a;
-  --text-light: #666666;
+  --text-dark: #1A2E3B;     /* Deep sea-inspired dark text */
+  --text-light: #5A7A8A;    /* Muted sea-blue light text */
 }
 
 /* Admin panel dark theme - scoped to /admin routes */

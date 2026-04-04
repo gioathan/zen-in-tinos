@@ -2,30 +2,21 @@
 
 import { Card, message } from "antd";
 import { useRouter } from "next/navigation";
-import { supabaseClient } from "@/lib/supabase";
+import { adminFetch } from "@/lib/adminFetch";
 import AmenityForm from "../_components/AmenityForm";
 
 export default function CreateAmenity() {
   const router = useRouter();
 
   const handleSubmit = async (values: any) => {
-    try {
-      const { error } = await supabaseClient
-        .from("amenities")
-        .insert([{
-          name: values.name,
-          icon: values.icon,
-          category: values.category,
-          display_order: values.display_order || 0,
-        }]);
-
-      if (error) throw error;
-
-      message.success('Amenity created successfully');
-      router.push('/admin/amenities');
-    } catch (error: any) {
-      message.error(error.message || 'Failed to create amenity');
-    }
+    const res = await adminFetch("/api/admin/amenities", {
+      method: "POST",
+      body: JSON.stringify(values),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Failed to create amenity");
+    message.success("Amenity created successfully");
+    router.push("/admin/amenities");
   };
 
   return (

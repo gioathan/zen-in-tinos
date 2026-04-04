@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -46,7 +46,7 @@ export default async function HomePage() {
             </p>
             <Link
               href="/houses"
-              className="inline-block bg-[#D9D2C8] text-[#000] px-8 py-4 rounded-full text-lg font-semibold hover:bg-white transition-all"
+              className="inline-block bg-white text-[#1A6B9A] px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#D4B896] hover:text-white transition-all"
             >
               Explore Our Houses
             </Link>
@@ -55,10 +55,10 @@ export default async function HomePage() {
       </section>
 
       {/* Featured Houses Section */}
-      <section className="py-20 bg-[#FBEEC1]">
+      <section className="py-20 bg-[#F7F3EE]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#78D7E0] mb-4">Featured Properties</h2>
+            <h2 className="text-4xl font-bold text-[#1A6B9A] mb-4">Featured Properties</h2>
             <p className="text-lg text-gray-600">
               Handpicked homes for your perfect getaway
             </p>
@@ -81,7 +81,7 @@ export default async function HomePage() {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#78D7E0] mb-2 group-hover:text-[#D9D2C8] transition">
+                  <h3 className="text-xl font-bold text-[#1A6B9A] mb-2 group-hover:text-[#C4704A] transition">
                     {house.title}
                   </h3>
                   <p className="text-gray-600 text-sm mb-4">
@@ -96,7 +96,7 @@ export default async function HomePage() {
                   </div>
                   {house.price_per_night && (
                     <div className="mt-4 pt-4 border-t">
-                      <span className="text-2xl font-bold text-[#78D7E0]">
+                      <span className="text-2xl font-bold text-[#1A6B9A]">
                         €{house.price_per_night}
                       </span>
                       <span className="text-gray-600"> / night</span>
@@ -110,7 +110,7 @@ export default async function HomePage() {
           <div className="text-center mt-12">
             <Link
               href="/houses"
-              className="inline-block bg-[#78D7E0] text-black px-8 py-3 rounded-full hover:bg-[#D9D2C8] hover:text-[#000] transition-all"
+              className="inline-block bg-[#1A6B9A] text-white px-8 py-3 rounded-full hover:bg-[#C4704A] hover:text-white transition-all"
             >
               View All Properties
             </Link>
@@ -122,7 +122,7 @@ export default async function HomePage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#78D7E0] mb-4">Our Services</h2>
+            <h2 className="text-4xl font-bold text-[#1A6B9A] mb-4">Our Services</h2>
             <p className="text-lg text-gray-600">
               Everything you need for a comfortable stay
             </p>
@@ -132,7 +132,7 @@ export default async function HomePage() {
             {services?.map((service) => (
               <div
                 key={service.id}
-                className="text-center p-8 rounded-lg bg-[#FBEEC1] hover:bg-[#D9D2C8] transition-all group"
+                className="text-center p-8 rounded-lg bg-[#F7F3EE] hover:bg-[#1A6B9A] transition-all group"
               >
                 {service.image_url && (
                   <div className="relative h-48 mb-6 rounded-lg overflow-hidden">
@@ -145,7 +145,7 @@ export default async function HomePage() {
                     />
                   </div>
                 )}
-                <h3 className="text-xl font-bold text-[#78D7E0] mb-3 group-hover:text-white transition">
+                <h3 className="text-xl font-bold text-[#1A6B9A] mb-3 group-hover:text-white transition">
                   {service.title}
                 </h3>
                 <p className="text-gray-700 group-hover:text-white transition">
@@ -158,7 +158,7 @@ export default async function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-[#78D7E0] text-white">
+      <section className="py-20 bg-[#1A6B9A] text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Book Your Stay?</h2>
           <p className="text-xl mb-8 text-gray-200">
@@ -166,7 +166,7 @@ export default async function HomePage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block bg-[#D9D2C8] text-[#000] px-8 py-4 rounded-full text-lg font-semibold hover:bg-white transition-all"
+            className="inline-block bg-white text-[#1A6B9A] px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#D4B896] hover:text-white transition-all"
           >
             Get in Touch
           </Link>

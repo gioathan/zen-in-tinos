@@ -3,6 +3,7 @@
 import { Card, message, Spin } from "antd";
 import { useParams, useRouter } from "next/navigation";
 import { supabaseClient } from "@/lib/supabase";
+import { adminFetch } from "@/lib/adminFetch";
 import AmenityForm from "../_components/AmenityForm";
 import { useEffect, useState } from "react";
 
@@ -21,41 +22,30 @@ export default function EditAmenity() {
         .single();
 
       if (error) {
-        message.error('Failed to load amenity');
-        router.push('/admin/amenities');
+        message.error("Failed to load amenity");
+        router.push("/admin/amenities");
       } else {
         setAmenity(data);
       }
       setLoading(false);
     }
-
     fetchAmenity();
   }, [params.id, router]);
 
   const handleSubmit = async (values: any) => {
-    try {
-      const { error } = await supabaseClient
-        .from("amenities")
-        .update({
-          name: values.name,
-          icon: values.icon,
-          category: values.category,
-          display_order: values.display_order || 0,
-        })
-        .eq("id", params.id);
-
-      if (error) throw error;
-
-      message.success('Amenity updated successfully');
-      router.push('/admin/amenities');
-    } catch (error: any) {
-      message.error(error.message || 'Failed to update amenity');
-    }
+    const res = await adminFetch(`/api/admin/amenities/${params.id}`, {
+      method: "PUT",
+      body: JSON.stringify(values),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Failed to update amenity");
+    message.success("Amenity updated successfully");
+    router.push("/admin/amenities");
   };
 
   if (loading) {
     return (
-      <div style={{ textAlign: 'center', padding: 50 }}>
+      <div style={{ textAlign: "center", padding: 50 }}>
         <Spin size="large" />
       </div>
     );
