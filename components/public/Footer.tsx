@@ -99,7 +99,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/20 mt-8 pt-8 text-center text-sm text-gray-100">
-          <p>{settings.footer_text || "© 2026 Tinos Holiday Homes. All rights reserved."}</p>
+          <p>{settings.footer_text || "© 2026 Zen in Tinos. All rights reserved."}</p>
         </div>
       </div>
     </footer>

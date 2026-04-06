@@ -64,6 +64,20 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                 },
               },
               {
+                name: "experiences",
+                list: "/admin/experiences",
+                create: "/admin/experiences/new",
+                edit: "/admin/experiences/:id",
+                meta: { label: "Experiences" },
+              },
+              {
+                name: "experience_categories",
+                list: "/admin/experience-categories",
+                create: "/admin/experience-categories/new",
+                edit: "/admin/experience-categories/:id",
+                meta: { label: "Experience Categories" },
+              },
+              {
                 name: "site_settings",
                 list: "/admin/site-settings",
                 meta: {

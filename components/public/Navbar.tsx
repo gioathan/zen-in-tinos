@@ -128,12 +128,22 @@ export default function Navbar() {
             <Link
               href="/services"
               className={`font-medium transition-colors duration-300 ${
-                isScrolled 
-                  ? "text-[#78D7E0] hover:text-[#D9D2C8]" 
+                isScrolled
+                  ? "text-[#78D7E0] hover:text-[#D9D2C8]"
                   : "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-[#D9D2C8]"
               }`}
             >
               Services
+            </Link>
+            <Link
+              href="/experiences"
+              className={`font-medium transition-colors duration-300 ${
+                isScrolled
+                  ? "text-[#1A6B9A] hover:text-[#C4704A]"
+                  : "text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hover:text-[#D4B896]"
+              }`}
+            >
+              Experiences
             </Link>
             <Link
               href="/contact"
@@ -202,6 +212,13 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Services
+            </Link>
+            <Link
+              href="/experiences"
+              className="block text-white hover:text-[#D4B896] text-lg font-medium py-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Experiences
             </Link>
             <Link
               href="/contact"

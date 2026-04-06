@@ -5,13 +5,14 @@ import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "antd";
 import Providers from "../providers"; // ← Add this import
-import { 
-  LogoutOutlined, 
-  DashboardOutlined, 
-  HomeOutlined, 
+import {
+  LogoutOutlined,
+  DashboardOutlined,
+  HomeOutlined,
   AppstoreOutlined,
   StarOutlined,
   SettingOutlined,
+  CompassOutlined,
 } from "@ant-design/icons";
 
 export default function AdminLayout({
@@ -75,6 +76,8 @@ export default function AdminLayout({
     { href: "/admin/houses", label: "Houses", icon: <HomeOutlined /> },
     { href: "/admin/services", label: "Services", icon: <AppstoreOutlined /> },
     { href: "/admin/amenities", label: "Amenities", icon: <StarOutlined /> },
+    { href: "/admin/experiences", label: "Experiences", icon: <CompassOutlined /> },
+    { href: "/admin/experience-categories", label: "Exp. Categories", icon: <AppstoreOutlined /> },
     { href: "/admin/site-settings", label: "Site Settings", icon: <SettingOutlined /> },
   ];
 

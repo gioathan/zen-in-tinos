@@ -27,7 +27,7 @@ export default async function HomePage() {
       {/* Hero Section */}
       <section className="relative h-screen">
         <Image
-          src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1920&h=1080&fit=crop&q=85"
+          src="/homepage.jpg"
           alt="Tinos Greece"
           fill
           priority
@@ -39,16 +39,16 @@ export default async function HomePage() {
         <div className="relative z-10 flex items-center justify-center h-full">
           <div className="text-center text-white px-4 max-w-4xl">
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              YOUR HOME AWAY FROM HOME
+              Where the Cyclades Become Your Home
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-200">
-              Discover beautiful holiday homes in the heart of Tinos
+              Handpicked homes, authentic stays, and effortless island living.
             </p>
             <Link
               href="/houses"
               className="inline-block bg-white text-[#1A6B9A] px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#D4B896] hover:text-white transition-all"
             >
-              Explore Our Houses
+              Explore Homes
             </Link>
           </div>
         </div>
