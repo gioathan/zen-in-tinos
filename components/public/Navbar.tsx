@@ -163,9 +163,15 @@ export default function Navbar() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className="text-white drop-shadow-lg" size={28} />
+              <X
+                className={isScrolled ? "text-black" : "text-white drop-shadow-lg"}
+                size={28}
+              />
             ) : (
-              <Menu className="text-white drop-shadow-lg" size={28} />
+              <Menu
+                className={isScrolled ? "text-black" : "text-white drop-shadow-lg"}
+                size={28}
+              />
             )}
           </button>
         </div>
