@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { getPublishedHouses } from "@/lib/data/public";
 
 export const revalidate = 3600;
 
@@ -10,13 +10,7 @@ export const metadata = {
 };
 
 export default async function HousesPage() {
-  const supabase = await createClient();
-
-  const { data: houses } = await supabase
-    .from("houses")
-    .select("*")
-    .eq("is_published", true)
-    .order("display_order", { ascending: true });
+  const houses = await getPublishedHouses();
 
   return (
     <div className="min-h-screen bg-[#F7F3EE]">

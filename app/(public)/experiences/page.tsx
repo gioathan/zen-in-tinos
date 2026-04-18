@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { createClient } from "@/lib/supabase/server";
+import { getExperiences } from "@/lib/data/public";
 import type { Metadata } from "next";
 
 export const revalidate = 3600;
@@ -14,19 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ExperiencesPage() {
-  const supabase = await createClient();
-
-  const [{ data: categories }, { data: experiences }] = await Promise.all([
-    supabase
-      .from("experience_categories")
-      .select("id, label")
-      .order("display_order", { ascending: true }),
-    supabase
-      .from("experiences")
-      .select("*")
-      .eq("is_active", true)
-      .order("display_order", { ascending: true }),
-  ]);
+  const { categories, experiences } = await getExperiences();
 
   return (
     <>

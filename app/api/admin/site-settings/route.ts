@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import { createAdminClient, verifyAuth } from "@/lib/supabase/admin";
 
 export async function PUT(request: Request) {
@@ -13,5 +14,6 @@ export async function PUT(request: Request) {
   );
 
   await Promise.all(updates);
+  revalidateTag("settings", "default");
   return NextResponse.json({ success: true });
 }

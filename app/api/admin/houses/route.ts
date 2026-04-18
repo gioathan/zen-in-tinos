@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import { createAdminClient, verifyAuth } from "@/lib/supabase/admin";
 
 export async function POST(request: Request) {
@@ -55,5 +56,6 @@ export async function POST(request: Request) {
     );
   }
 
+  revalidateTag("houses", "default");
   return NextResponse.json(house);
 }

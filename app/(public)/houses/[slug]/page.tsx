@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { getHouseBySlug } from "@/lib/data/public";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
@@ -12,14 +12,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const supabase = await createClient();
-  
-  const { data: house } = await supabase
-    .from("houses")
-    .select("*")
-    .eq("slug", slug)
-    .eq("is_published", true)
-    .single();
+  const house = await getHouseBySlug(slug);
 
   if (!house) {
     return {
@@ -49,32 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function HouseDetailPage({ params }: Props) {
   const { slug } = await params;
-  const supabase = await createClient();
-
-  // Fetch house with images and amenities
-  const { data: house } = await supabase
-    .from("houses")
-    .select(`
-      *,
-      house_images (
-        id,
-        image_url,
-        alt_text,
-        display_order
-      ),
-      house_amenities (
-        amenity_id,
-        amenities (
-          id,
-          name,
-          icon,
-          category
-        )
-      )
-    `)
-    .eq("slug", slug)
-    .eq("is_published", true)
-    .single();
+  const house = await getHouseBySlug(slug);
 
   if (!house) {
     notFound();

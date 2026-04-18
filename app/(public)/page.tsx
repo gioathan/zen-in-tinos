@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { getFeaturedHouses, getFeaturedServices } from "@/lib/data/public";
 import type { Metadata } from "next";
 
 export const revalidate = 3600;
@@ -16,22 +16,10 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const supabase = await createClient();
-
-  const { data: houses } = await supabase
-    .from("houses")
-    .select("*")
-    .eq("is_published", true)
-    .eq("is_featured", true)
-    .order("display_order", { ascending: true })
-    .limit(3);
-
-  const { data: services } = await supabase
-    .from("services")
-    .select("*")
-    .eq("is_active", true)
-    .order("display_order", { ascending: true })
-    .limit(3);
+  const [houses, services] = await Promise.all([
+    getFeaturedHouses(),
+    getFeaturedServices(),
+  ]);
 
   const orgJsonLd = {
     "@context": "https://schema.org",

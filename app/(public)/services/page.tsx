@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { getActiveServices } from "@/lib/data/public";
 
 export const revalidate = 3600;
 
@@ -10,13 +10,7 @@ export const metadata = {
 };
 
 export default async function ServicesPage() {
-  const supabase = await createClient();
-
-  const { data: services } = await supabase
-    .from("services")
-    .select("*")
-    .eq("is_active", true)
-    .order("display_order", { ascending: true });
+  const services = await getActiveServices();
 
   return (
     <div className="min-h-screen bg-white">
