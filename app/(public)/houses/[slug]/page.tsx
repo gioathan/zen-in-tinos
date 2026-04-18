@@ -28,8 +28,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: house.meta_title || `${house.title} | Zen in Tinos`,
+    title: house.meta_title || house.title,
     description: house.meta_description || house.short_description || house.description,
+    openGraph: {
+      title: house.meta_title || house.title,
+      description: house.meta_description || house.short_description || house.description,
+      images: house.featured_image_url
+        ? [{ url: house.featured_image_url, width: 1200, height: 630, alt: house.title }]
+        : [],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: house.meta_title || house.title,
+      description: house.meta_description || house.short_description || house.description,
+      images: house.featured_image_url ? [house.featured_image_url] : [],
+    },
   };
 }
 
@@ -80,8 +94,36 @@ export default async function HouseDetailPage({ params }: Props) {
   // Get amenities
   const amenities = house.house_amenities?.map((ha: any) => ha.amenities).filter(Boolean) || [];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    name: house.title,
+    description: house.short_description || house.description,
+    image: house.featured_image_url,
+    url: `${process.env.NEXT_PUBLIC_DOMAIN}/houses/${house.slug}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: house.location_area ? `${house.location_area}, Tinos` : "Tinos",
+      addressRegion: "South Aegean",
+      addressCountry: "GR",
+    },
+    ...(house.price_per_night && {
+      priceRange: `€${house.price_per_night} per night`,
+    }),
+    numberOfRooms: house.bedrooms,
+    amenityFeature: amenities.map((a: any) => ({
+      "@type": "LocationFeatureSpecification",
+      name: a.name,
+      value: true,
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Image Gallery */}
       <section className="pt-20">
         <div className="max-w-7xl mx-auto px-4 pt-5 sm:px-6 lg:px-8">

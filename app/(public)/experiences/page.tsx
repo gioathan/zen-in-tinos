@@ -1,7 +1,17 @@
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
+import type { Metadata } from "next";
 
 export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: "Experiences in Tinos",
+  description: "Discover authentic Cycladic experiences in Tinos, Greece. From local cuisine and cultural tours to island hiking and boat trips – create unforgettable memories.",
+  openGraph: {
+    title: "Experiences in Tinos",
+    description: "Discover authentic Cycladic experiences in Tinos, Greece. Local cuisine, cultural tours, island hiking, and more.",
+  },
+};
 
 export default async function ExperiencesPage() {
   const supabase = await createClient();

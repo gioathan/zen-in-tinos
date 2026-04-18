@@ -7,8 +7,32 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const rammetto = Rammetto_One({ subsets: ["latin"], weight: "400", variable: "--font-rammetto" });
 
 export const metadata: Metadata = {
-  title: "Zen in Tinos",
-  description: "Discover beautiful holiday homes in Tinos, Greece",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"),
+  title: {
+    default: "Zen in Tinos",
+    template: "%s | Zen in Tinos",
+  },
+  description: "Discover beautiful holiday homes in Tinos, Greece. Traditional stone houses, modern villas, and seaside studios in the heart of the Cyclades.",
+  keywords: ["Tinos", "holiday homes", "vacation rental", "Greece", "Cyclades", "villa rental", "stone houses", "island stay"],
+  authors: [{ name: "Zen in Tinos" }],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Zen in Tinos",
+    title: "Zen in Tinos",
+    description: "Discover beautiful holiday homes in Tinos, Greece.",
+    images: [{ url: "/homepage.jpg", width: 1200, height: 630, alt: "Zen in Tinos – Holiday Homes in the Cyclades" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Zen in Tinos",
+    description: "Discover beautiful holiday homes in Tinos, Greece.",
+    images: ["/homepage.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

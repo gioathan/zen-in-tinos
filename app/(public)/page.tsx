@@ -1,8 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import type { Metadata } from "next";
 
 export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: "Holiday Homes in Tinos, Greece",
+  description: "Handpicked holiday homes in Tinos, Greece. Authentic Cycladic stays with stunning views, modern amenities, and personalised concierge service.",
+  openGraph: {
+    title: "Holiday Homes in Tinos, Greece",
+    description: "Handpicked holiday homes in Tinos, Greece. Authentic Cycladic stays with stunning views and personalised service.",
+    images: [{ url: "/homepage.jpg", width: 1200, height: 630, alt: "Zen in Tinos – Holiday Homes in the Cyclades" }],
+  },
+};
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -22,8 +33,28 @@ export default async function HomePage() {
     .order("display_order", { ascending: true })
     .limit(3);
 
+  const orgJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    name: "Zen in Tinos",
+    url: process.env.NEXT_PUBLIC_DOMAIN,
+    description: "Handpicked holiday homes in Tinos, Greece. Traditional stone houses, modern villas, and seaside studios.",
+    image: `${process.env.NEXT_PUBLIC_DOMAIN}/homepage.jpg`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Tinos",
+      addressRegion: "South Aegean",
+      addressCountry: "GR",
+    },
+    areaServed: "Tinos, Cyclades, Greece",
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+      />
       {/* Hero Section */}
       <section className="relative h-screen">
         <Image
