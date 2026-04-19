@@ -31,7 +31,7 @@ export async function uploadImage(
     const fileName = `${folder}/${Date.now()}_${sanitizedName}.${fileExt}`;
     
     const { error } = await supabaseClient.storage
-      .from("Images")
+      .from("zen-in-tinos")
       .upload(fileName, compressedFile, {
         cacheControl: '3600',
         upsert: false
@@ -42,7 +42,7 @@ export async function uploadImage(
     }
 
     const { data: { publicUrl } } = supabaseClient.storage
-      .from("Images")
+      .from("zen-in-tinos")
       .getPublicUrl(fileName);
 
     return publicUrl;
@@ -53,10 +53,10 @@ export async function uploadImage(
 
 export async function deleteImage(url: string): Promise<void> {
   try {
-    const path = url.split('/storage/v1/object/public/images/')[1];
+    const path = url.split('/storage/v1/object/public/zen-in-tinos/')[1];
     
     if (path) {
-      const { error } = await supabaseClient.storage.from("Images").remove([path]);
+      const { error } = await supabaseClient.storage.from("zen-in-tinos").remove([path]);
     }
   } catch (error) {
   }
