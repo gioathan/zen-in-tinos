@@ -8,16 +8,48 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 
   const { id } = await params;
   const body = await request.json();
-  const { error } = await createAdminClient()
+  const supabase = createAdminClient();
+
+  let imageId: string | null | undefined = undefined;
+  if (body.image_url !== undefined) {
+    const { data: current } = await supabase
+      .from("services")
+      .select("image_id, image_url")
+      .eq("id", id)
+      .single();
+
+    if (body.image_url !== current?.image_url) {
+      if (current?.image_id) {
+        await supabase.from("images").delete().eq("id", current.image_id);
+      }
+      if (body.image_url) {
+        const { data: img } = await supabase
+          .from("images")
+          .insert([{ url: body.image_url, alt_text: body.title ?? null }])
+          .select("id")
+          .single();
+        imageId = img?.id ?? null;
+      } else {
+        imageId = null;
+      }
+    } else {
+      imageId = current?.image_id ?? null;
+    }
+  }
+
+  const updatePayload: Record<string, unknown> = {
+    title: body.title,
+    description: body.description,
+    icon: body.icon,
+    image_url: body.image_url,
+    display_order: body.display_order ?? 0,
+    is_active: body.is_active !== false,
+  };
+  if (imageId !== undefined) updatePayload.image_id = imageId;
+
+  const { error } = await supabase
     .from("services")
-    .update({
-      title: body.title,
-      description: body.description,
-      icon: body.icon,
-      image_url: body.image_url,
-      display_order: body.display_order ?? 0,
-      is_active: body.is_active !== false,
-    })
+    .update(updatePayload)
     .eq("id", id);
 
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });

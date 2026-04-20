@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
-import { Inter, Rammetto_One } from "next/font/google";
-import Script from "next/script";
+import { Inter, Rammetto_One, Noto_Serif, Manrope } from "next/font/google";
+// import Script from "next/script"; // re-enable with Google Translate
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const rammetto = Rammetto_One({ subsets: ["latin"], weight: "400", variable: "--font-rammetto" });
+const notoSerif = Noto_Serif({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-noto-serif",
+});
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-manrope",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"),
@@ -43,6 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google Translate — disabled for now, re-enable when needed
         <Script
           src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
           strategy="afterInteractive"
@@ -58,8 +70,9 @@ export default function RootLayout({
             }
           `}
         </Script>
+        */}
       </head>
-      <body className={`${inter.variable} ${rammetto.variable} font-sans`}>
+      <body className={`${inter.variable} ${rammetto.variable} ${notoSerif.variable} ${manrope.variable} font-sans`}>
         {children}
       </body>
     </html>

@@ -5,141 +5,155 @@ import { getActiveServices } from "@/lib/data/public";
 export const revalidate = 3600;
 
 export const metadata = {
-  title: "Our Services | Zen in Tinos",
-  description: "Discover the services we offer to make your stay in Tinos unforgettable. Airport transfers, concierge, cleaning, and 24/7 support.",
+  title: "Our Services",
+  description:
+    "Discover the services we offer to make your stay in Tinos unforgettable. Airport transfers, concierge, cleaning, and 24/7 support.",
 };
+
+const bentoCol = [
+  "md:col-span-8",
+  "md:col-span-4",
+  "md:col-span-5",
+  "md:col-span-7",
+  "md:col-span-4",
+  "md:col-span-4",
+  "md:col-span-4",
+];
+
+const bentoAspect = [
+  "aspect-[16/9]",
+  "aspect-[4/5]",
+  "aspect-square",
+  "aspect-[16/9]",
+  "aspect-[4/3]",
+  "aspect-[4/3]",
+  "aspect-[4/3]",
+];
 
 export default async function ServicesPage() {
   const services = await getActiveServices();
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header Section */}
-      <section className="relative h-80 bg-[#1A6B9A]">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white px-4 max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
-            <p className="text-lg md:text-xl text-gray-100">
-              Everything you need for a comfortable and memorable stay in Tinos
+    <div className="bg-[#fdf9f4] min-h-screen">
+      {/* ── Hero ──────────────────────────────── */}
+      <header className="pt-36 pb-16 lg:pt-44 lg:pb-24 max-w-screen-2xl mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+          <div>
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl text-[#1c1c19] leading-tight mb-6">
+              Our Curated{" "}
+              <span className="italic text-[#00527b]">Services</span>
+            </h1>
+            <p className="text-lg text-[#40484f] font-light max-w-xl leading-relaxed">
+              From the moment you arrive until your departure, we ensure every
+              detail of your stay is perfect.
             </p>
           </div>
+          <div className="hidden lg:flex items-center gap-4 text-sm tracking-widest uppercase text-[#707880] pb-4">
+            <span>Crafted Luxury</span>
+            <span className="w-12 h-px bg-[#c0c7d0]" />
+            <span>Island Soul</span>
+          </div>
         </div>
-      </section>
+      </header>
 
-      {/* Services Grid */}
-      <section className="py-20 bg-[#F7F3EE]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {services && services.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {services.map((service) => (
-                <div
-                  key={service.id}
-                  className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all group"
-                >
-                  {service.image_url && (
-                    <div className="relative h-64">
-                      <Image
-                        src={service.image_url}
-                        alt={service.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
+      {/* ── Bento Grid ────────────────────────── */}
+      <section className="max-w-screen-2xl mx-auto px-6 lg:px-12 pb-24 lg:pb-32">
+        {services && services.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
+            {services.map((service, i) => (
+              <div
+                key={service.id}
+                className={`group relative overflow-hidden rounded-sm bg-[#f1ede8] transition-all duration-500 hover:shadow-lg ${bentoCol[Math.min(i, bentoCol.length - 1)]}`}
+              >
+                {service.image_url && (
+                  <div className={`overflow-hidden ${bentoAspect[Math.min(i, bentoAspect.length - 1)]}`}>
+                    <Image
+                      src={service.image_url}
+                      alt={service.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw"
+                    />
+                  </div>
+                )}
+                <div className={`p-8 ${i === 0 ? "lg:p-12" : "lg:p-10"}`}>
+                  <div
+                    className={`flex ${
+                      i === 3
+                        ? "flex-col md:flex-row md:items-center justify-between gap-6"
+                        : "justify-between items-start"
+                    }`}
+                  >
+                    <div className={i === 3 ? "max-w-md" : ""}>
+                      <h3
+                        className={`font-serif text-[#1c1c19] mb-3 ${
+                          i === 0 ? "text-3xl" : "text-2xl"
+                        }`}
+                      >
+                        {service.title}
+                      </h3>
+                      <p className="text-[#40484f] font-light leading-relaxed">
+                        {service.description}
+                      </p>
                     </div>
-                  )}
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-[#1A6B9A] mb-3 group-hover:text-[#C4704A] transition">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      {service.description}
-                    </p>
+                    {i === 3 && (
+                      <Link
+                        href="/contact"
+                        className="flex items-center gap-2 text-[#00527b] font-medium text-sm whitespace-nowrap group/btn"
+                      >
+                        Enquire Now
+                        <svg
+                          className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </Link>
+                    )}
                   </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-600 text-lg">No services available at the moment.</p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1A6B9A] mb-4">
-              Why Choose Zen in Tinos?
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We're committed to making your Tinos experience exceptional
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20">
+            <p className="text-[#40484f] text-lg">
+              No services available at the moment.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-4 bg-[#F7F3EE] rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-[#1A6B9A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-[#1A6B9A] mb-2">24/7 Availability</h3>
-              <p className="text-gray-600">
-                We're here whenever you need us, day or night
-              </p>
-            </div>
-
-            <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-4 bg-[#F7F3EE] rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-[#1A6B9A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-[#1A6B9A] mb-2">Local Expertise</h3>
-              <p className="text-gray-600">
-                Insider knowledge of the best spots and hidden gems
-              </p>
-            </div>
-
-            <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-4 bg-[#F7F3EE] rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-[#1A6B9A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-[#1A6B9A] mb-2">Quality Guaranteed</h3>
-              <p className="text-gray-600">
-                Every property and service meets our high standards
-              </p>
-            </div>
-          </div>
-        </div>
+        )}
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-[#1A6B9A] text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Experience Tinos?
-          </h2>
-          <p className="text-xl mb-8 text-gray-100">
-            Let us help you plan your perfect holiday in Tinos
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/houses"
-              className="inline-block bg-white text-[#1A6B9A] px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#D4B896] hover:text-white transition-all"
-            >
-              Browse Houses
-            </Link>
+      {/* ── CTA ───────────────────────────────── */}
+      <section className="max-w-screen-2xl mx-auto px-6 lg:px-12 pb-24 lg:pb-32">
+        <div className="bg-[#f7f3ee] rounded-sm p-12 lg:p-20 text-center border border-[#e6e2dd]/50 relative overflow-hidden">
+          <div className="relative z-10">
+            <h2 className="font-serif text-3xl lg:text-4xl text-[#1c1c19] mb-5">
+              Ready to elevate your stay?
+            </h2>
+            <p className="text-[#40484f] font-light mb-10 max-w-2xl mx-auto leading-relaxed">
+              Our concierge is at your disposal to customise every aspect of
+              your Tinian escape. Let us handle the details while you embrace
+              the silence.
+            </p>
             <Link
               href="/contact"
-              className="inline-block bg-transparent border-2 border-white text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-white hover:text-[#1A6B9A] transition-all"
+              className="inline-block bg-[#00527b] text-white px-10 py-4 rounded text-sm font-medium tracking-widest uppercase hover:bg-[#1a6b9a] transition-colors"
             >
-              Contact Us
+              Contact Concierge
             </Link>
+          </div>
+          <div className="absolute top-0 right-0 p-10 opacity-5 pointer-events-none select-none">
+            <svg className="w-48 h-48 text-[#00527b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.5} d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+            </svg>
           </div>
         </div>
       </section>
