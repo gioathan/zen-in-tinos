@@ -21,13 +21,13 @@ const bentoCol = [
 ];
 
 const bentoAspect = [
-  "aspect-[16/9]",
-  "aspect-[4/5]",
-  "aspect-square",
-  "aspect-[16/9]",
-  "aspect-[4/3]",
-  "aspect-[4/3]",
-  "aspect-[4/3]",
+  "md:aspect-[16/9]",
+  "md:aspect-[4/5]",
+  "md:aspect-square",
+  "md:aspect-[16/9]",
+  "md:aspect-[4/3]",
+  "md:aspect-[4/3]",
+  "md:aspect-[4/3]",
 ];
 
 export default async function ServicesPage() {
@@ -66,7 +66,7 @@ export default async function ServicesPage() {
                 className={`group relative overflow-hidden rounded-sm bg-[#f1ede8] transition-all duration-500 hover:shadow-lg ${bentoCol[Math.min(i, bentoCol.length - 1)]}`}
               >
                 {service.image_url && (
-                  <div className={`overflow-hidden ${bentoAspect[Math.min(i, bentoAspect.length - 1)]}`}>
+                  <div className={`relative overflow-hidden h-48 md:h-auto ${bentoAspect[Math.min(i, bentoAspect.length - 1)]}`}>
                     <Image
                       src={service.image_url}
                       alt={service.title}
@@ -76,12 +76,12 @@ export default async function ServicesPage() {
                     />
                   </div>
                 )}
-                <div className={`p-8 ${i === 0 ? "lg:p-12" : "lg:p-10"}`}>
+                <div className={`p-5 sm:p-8 ${i === 0 ? "lg:p-12" : "lg:p-10"}`}>
                   <div
-                    className={`flex ${
+                    className={`flex flex-col ${
                       i === 3
-                        ? "flex-col md:flex-row md:items-center justify-between gap-6"
-                        : "justify-between items-start"
+                        ? "sm:flex-row sm:items-center justify-between gap-4 sm:gap-6"
+                        : "gap-0"
                     }`}
                   >
                     <div className={i === 3 ? "max-w-md" : ""}>
@@ -133,7 +133,7 @@ export default async function ServicesPage() {
 
       {/* ── CTA ───────────────────────────────── */}
       <section className="max-w-screen-2xl mx-auto px-6 lg:px-12 pb-24 lg:pb-32">
-        <div className="bg-[#f7f3ee] rounded-sm p-12 lg:p-20 text-center border border-[#e6e2dd]/50 relative overflow-hidden">
+        <div className="bg-[#f7f3ee] rounded-sm p-8 sm:p-12 lg:p-20 text-center border border-[#e6e2dd]/50 relative overflow-hidden">
           <div className="relative z-10">
             <h2 className="font-serif text-3xl lg:text-4xl text-[#1c1c19] mb-5">
               Ready to elevate your stay?
