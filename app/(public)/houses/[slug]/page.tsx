@@ -70,7 +70,7 @@ export default async function HouseDetailPage({ params }: Props) {
     url: `${process.env.NEXT_PUBLIC_DOMAIN}/houses/${house.slug}`,
     address: {
       "@type": "PostalAddress",
-      addressLocality: house.location_area ? `${house.location_area}, Tinos` : "Tinos",
+      addressLocality: house.location_area ? `${house.location_area}, Cyclades` : "Tinos",
       addressRegion: "South Aegean",
       addressCountry: "GR",
     },
@@ -152,7 +152,7 @@ export default async function HouseDetailPage({ params }: Props) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    {house.location_area}, Tinos
+                    {house.location_area}, Cyclades
                   </p>
                 )}
               </div>
