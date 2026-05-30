@@ -81,11 +81,9 @@ export default async function IslandPage({ params }: Props) {
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 60vw"
                     />
-                    {house.location_area && (
-                      <div className="absolute top-5 left-5 bg-[#fdf9f4]/90 backdrop-blur-sm px-4 py-1.5 rounded-sm text-[10px] font-bold uppercase tracking-widest text-[#1c1c19]">
-                        {house.location_area}
-                      </div>
-                    )}
+                    <div className="absolute top-5 left-5 bg-[#fdf9f4]/90 backdrop-blur-sm px-4 py-1.5 rounded-sm text-[10px] font-bold uppercase tracking-widest text-[#1c1c19]">
+                      {house.location_area ? `${house.location_area} · ${island.title}` : island.title}
+                    </div>
                   </div>
 
                   <div className="space-y-2">
