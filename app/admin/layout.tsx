@@ -13,6 +13,7 @@ import {
   StarOutlined,
   SettingOutlined,
   CompassOutlined,
+  GlobalOutlined,
 } from "@ant-design/icons";
 
 export default function AdminLayout({
@@ -79,6 +80,7 @@ export default function AdminLayout({
 
   const navItems = [
     { href: "/admin", label: "Dashboard", icon: <DashboardOutlined /> },
+    { href: "/admin/islands", label: "Islands", icon: <GlobalOutlined /> },
     { href: "/admin/houses", label: "Houses", icon: <HomeOutlined /> },
     { href: "/admin/services", label: "Services", icon: <AppstoreOutlined /> },
     { href: "/admin/amenities", label: "Amenities", icon: <StarOutlined /> },

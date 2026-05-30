@@ -1,30 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getPublishedHouses } from "@/lib/data/public";
+import { getIslandsWithPreview } from "@/lib/data/public";
 
 export const revalidate = 3600;
 
 export const metadata = {
   title: "The Villas",
   description:
-    "Browse our collection of beautiful holiday homes in Tinos, Greece. Traditional stone houses, modern villas, and seaside studios.",
+    "Browse our collection of beautiful holiday homes across the Cyclades. Traditional stone houses, modern villas, and seaside studios.",
 };
 
-/* Static Tailwind col-span classes (must be complete strings for purging) */
-const colClasses = [
-  "lg:col-span-8",
-  "lg:col-span-4",
-  "lg:col-span-5",
-  "lg:col-span-7",
-  "lg:col-span-6",
-  "lg:col-span-6",
-];
-const colValues = [8, 4, 5, 7, 6, 6];
-const heightPattern = [500, 600, 450, 450, 480, 480];
-const offsetPattern = ["", "lg:mt-24", "", "lg:-mt-20", "", ""];
-
 export default async function HousesPage() {
-  const houses = await getPublishedHouses();
+  const islands = await getIslandsWithPreview();
 
   return (
     <div className="bg-[#fdf9f4] min-h-screen">
@@ -44,73 +31,86 @@ export default async function HousesPage() {
         </div>
       </header>
 
-      {/* ── Asymmetric Gallery Grid ───────────────────────── */}
+      {/* ── Islands ──────────────────────────────────────── */}
       <section className="max-w-screen-2xl mx-auto px-6 lg:px-12 pb-24 lg:pb-32">
-        {houses && houses.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8">
-            {houses.map((house, i) => {
-              const idx = i % colClasses.length;
-              const col = colValues[idx];
-              const imgH = heightPattern[idx];
-              const offset = offsetPattern[idx];
-
-              return (
-                <Link
-                  key={house.id}
-                  href={`/houses/${house.slug}`}
-                  className={`group cursor-pointer ${colClasses[idx]} ${offset}`}
-                >
-                  <div
-                    className="relative overflow-hidden rounded-sm mb-5 bg-[#e6e2dd]"
-                    style={{ height: `${imgH}px` }}
-                  >
-                    <Image
-                      src={house.featured_image_url}
-                      alt={house.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 60vw"
-                    />
-                    {house.location_area && (
-                      <div className="absolute top-5 left-5 bg-[#fdf9f4]/90 backdrop-blur-sm px-4 py-1.5 rounded-sm text-[10px] font-bold uppercase tracking-widest text-[#1c1c19]">
-                        {house.location_area}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="space-y-2">
-                    <h3 className="font-serif text-xl lg:text-2xl text-[#1c1c19]">
-                      {house.title}
-                    </h3>
-                    {house.short_description && (
-                      <p className="text-sm text-[#40484f] line-clamp-2">
-                        {house.short_description}
+        {islands.length > 0 ? (
+          <div className="space-y-24 lg:space-y-32">
+            {islands.map((island: any, i: number) => (
+              <div key={island.id} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ${i % 2 === 1 ? "lg:[&>*:first-child]:order-last" : ""}`}>
+                {/* Island image / preview house image */}
+                <div className="relative overflow-hidden rounded-sm bg-[#e6e2dd]" style={{ height: 520 }}>
+                  {island.previewHouse?.featured_image_url ? (
+                    <Link href={`/${island.slug}/${island.previewHouse.slug}`}>
+                      <Image
+                        src={island.previewHouse.featured_image_url}
+                        alt={island.previewHouse.title}
+                        fill
+                        className="object-cover transition-transform duration-700 hover:scale-105"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                    </Link>
+                  ) : (
+                    <div className="w-full h-full bg-[#e6e2dd]" />
+                  )}
+                  {island.previewHouse && (
+                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#1c1c19]/80 to-transparent">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#ffdbcd] mb-1">
+                        Featured property
                       </p>
-                    )}
-                    <div className="flex items-center justify-between pt-1 gap-3">
-                      <div className="flex gap-3 text-sm text-[#40484f]">
-                        <span>{house.bedrooms} Beds</span>
-                        <span className="text-[#c0c7d0]">·</span>
-                        <span>{house.bathrooms} Baths</span>
+                      <h3 className="font-serif text-xl text-white">
+                        {island.previewHouse.title}
+                      </h3>
+                      <div className="flex items-center gap-3 mt-1 text-sm text-white/70">
+                        <span>{island.previewHouse.bedrooms} Beds</span>
+                        <span className="opacity-50">·</span>
+                        <span>{island.previewHouse.bathrooms} Baths</span>
+                        {island.previewHouse.price_per_night && (
+                          <>
+                            <span className="opacity-50">·</span>
+                            <span className="font-serif text-[#ffdbcd]">€{island.previewHouse.price_per_night}/night</span>
+                          </>
+                        )}
                       </div>
-                      {house.price_per_night && (
-                        <div className="text-right flex-shrink-0">
-                          <span className="font-serif text-xl text-[#00527b]">
-                            €{house.price_per_night}
-                          </span>
-                          <span className="text-xs text-[#40484f]"> /night</span>
-                        </div>
-                      )}
                     </div>
-                  </div>
-                </Link>
-              );
-            })}
+                  )}
+                </div>
+
+                {/* Island info */}
+                <div className="flex flex-col justify-center">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#00527b] mb-4">
+                    Cyclades
+                  </p>
+                  <h2 className="font-serif text-5xl lg:text-6xl text-[#1c1c19] mb-5 italic">
+                    {island.title}
+                  </h2>
+                  {island.subtitle && (
+                    <p className="text-lg text-[#40484f] font-light leading-relaxed mb-8 max-w-md">
+                      {island.subtitle}
+                    </p>
+                  )}
+                  <p className="text-sm text-[#40484f] mb-8">
+                    {island.houseCount === 0
+                      ? "Coming soon"
+                      : island.houseCount === 1
+                      ? "1 property available"
+                      : `${island.houseCount} properties available`}
+                  </p>
+                  {island.houseCount > 0 && (
+                    <Link
+                      href={`/${island.slug}`}
+                      className="self-start bg-[#00527b] text-white px-8 py-3.5 rounded text-sm font-medium hover:bg-[#1a6b9a] transition-colors"
+                    >
+                      Explore {island.title}
+                    </Link>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         ) : (
           <div className="text-center py-20">
             <p className="text-[#40484f] text-lg">
-              No properties available at the moment.
+              No destinations available at the moment.
             </p>
           </div>
         )}

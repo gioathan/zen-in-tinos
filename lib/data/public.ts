@@ -38,7 +38,8 @@ export const getHouseBySlug = unstable_cache(
       .select(`
         *,
         house_images (id, image_url, alt_text, display_order),
-        house_amenities (amenity_id, amenities (id, name, icon, category))
+        house_amenities (amenity_id, amenities (id, name, icon, category)),
+        islands (id, title, slug)
       `)
       .eq("slug", slug)
       .eq("is_published", true)
@@ -46,6 +47,58 @@ export const getHouseBySlug = unstable_cache(
     return data ?? null;
   },
   ["house-by-slug"],
+  { revalidate: TTL, tags: ["houses"] }
+);
+
+export const getIslandsWithPreview = unstable_cache(
+  async () => {
+    const supabase = createPublicClient();
+    const [{ data: islands }, { data: houses }] = await Promise.all([
+      supabase
+        .from("islands")
+        .select("id, title, subtitle, slug")
+        .not("slug", "is", null)
+        .order("display_order", { ascending: true }),
+      supabase
+        .from("houses")
+        .select("id, title, slug, featured_image_url, short_description, bedrooms, bathrooms, price_per_night, display_order, island_id")
+        .eq("is_published", true)
+        .order("display_order", { ascending: true }),
+    ]);
+    return (islands ?? []).map((island: any) => ({
+      ...island,
+      previewHouse: (houses ?? []).find((h: any) => h.island_id === island.id) ?? null,
+      houseCount: (houses ?? []).filter((h: any) => h.island_id === island.id).length,
+    }));
+  },
+  ["islands-with-preview"],
+  { revalidate: TTL, tags: ["islands", "houses"] }
+);
+
+export const getIslandBySlug = unstable_cache(
+  async (slug: string) => {
+    const { data } = await createPublicClient()
+      .from("islands")
+      .select("id, title, subtitle, slug")
+      .eq("slug", slug)
+      .single();
+    return data ?? null;
+  },
+  ["island-by-slug"],
+  { revalidate: TTL, tags: ["islands"] }
+);
+
+export const getHousesByIslandId = unstable_cache(
+  async (islandId: string) => {
+    const { data } = await createPublicClient()
+      .from("houses")
+      .select("*")
+      .eq("island_id", islandId)
+      .eq("is_published", true)
+      .order("display_order", { ascending: true });
+    return data ?? [];
+  },
+  ["houses-by-island"],
   { revalidate: TTL, tags: ["houses"] }
 );
 

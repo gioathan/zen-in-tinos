@@ -17,6 +17,7 @@ export default function HouseForm({ initialValues, onSubmit, isEdit = false }: H
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [amenities, setAmenities] = useState<any[]>([]);
+  const [islands, setIslands] = useState<any[]>([]);
   const [featuredImageUrl, setFeaturedImageUrl] = useState<string | null>(
     initialValues?.featured_image_url || null
   );
@@ -27,18 +28,24 @@ export default function HouseForm({ initialValues, onSubmit, isEdit = false }: H
   const [uploadingGallery, setUploadingGallery] = useState(false);
 
   useEffect(() => {
-    // Fetch amenities
     async function fetchAmenities() {
       const { data } = await supabaseClient
         .from("amenities")
         .select("*")
         .order("display_order", { ascending: true });
-      
-      if (data) {
-        setAmenities(data);
-      }
+      if (data) setAmenities(data);
     }
+
+    async function fetchIslands() {
+      const { data } = await supabaseClient
+        .from("islands")
+        .select("id, title")
+        .order("title", { ascending: true });
+      if (data) setIslands(data);
+    }
+
     fetchAmenities();
+    fetchIslands();
   }, []);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -286,6 +293,15 @@ export default function HouseForm({ initialValues, onSubmit, isEdit = false }: H
           mode="multiple"
           placeholder="Select amenities"
           options={amenities.map(a => ({ label: a.name, value: a.id }))}
+          style={{ width: '100%' }}
+        />
+      </Form.Item>
+
+      <Form.Item label="Island" name="island_id">
+        <Select
+          placeholder="Select island (optional)"
+          allowClear
+          options={islands.map(i => ({ label: i.title, value: i.id }))}
           style={{ width: '100%' }}
         />
       </Form.Item>

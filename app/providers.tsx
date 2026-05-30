@@ -37,6 +37,13 @@ export default function Providers({ children }: { children: React.ReactNode }) {
               liveProvider={liveProvider(supabaseClient)}
               resources={[
               {
+                name: "islands",
+                list: "/admin/islands",
+                create: "/admin/islands/new",
+                edit: "/admin/islands/:id",
+                meta: { label: "Islands" },
+              },
+              {
                 name: "houses",
                 list: "/admin/houses",
                 create: "/admin/houses/new",

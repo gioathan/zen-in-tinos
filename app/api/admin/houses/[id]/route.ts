@@ -32,6 +32,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       display_order: body.display_order ?? 0,
       meta_title: body.meta_title,
       meta_description: body.meta_description,
+      island_id: body.island_id ?? null,
     })
     .eq("id", id);
 

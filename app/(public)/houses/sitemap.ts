@@ -7,13 +7,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const { data: houses } = await supabase
     .from("houses")
-    .select("slug, updated_at")
+    .select("slug, updated_at, islands(slug)")
     .eq("is_published", true);
 
-  return (houses ?? []).map((house) => ({
-    url: `${baseUrl}/houses/${house.slug}`,
-    lastModified: house.updated_at ? new Date(house.updated_at) : new Date(),
-    changeFrequency: "weekly",
-    priority: 0.85,
-  }));
+  return (houses ?? []).map((house: any) => {
+    const islandSlug = house.islands?.slug;
+    const url = islandSlug
+      ? `${baseUrl}/${islandSlug}/${house.slug}`
+      : `${baseUrl}/houses/${house.slug}`;
+    return {
+      url,
+      lastModified: house.updated_at ? new Date(house.updated_at) : new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.85,
+    };
+  });
 }
