@@ -21,7 +21,7 @@ export default async function ExperiencesPage() {
   return (
     <div className="bg-[#fdf9f4] min-h-screen">
       {/* ── Hero ─────────────────────────────────────────── */}
-      <header className="pt-36 pb-16 lg:pt-44 lg:pb-24 max-w-screen-2xl mx-auto px-6 lg:px-12">
+      <header className="pt-24 pb-16 lg:pt-32 lg:pb-24 max-w-screen-2xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
           <div>
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl text-[#1c1c19] leading-tight mb-6">

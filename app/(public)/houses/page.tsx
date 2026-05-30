@@ -16,7 +16,7 @@ export default async function HousesPage() {
   return (
     <div className="bg-[#fdf9f4] min-h-screen">
       {/* ── Hero ─────────────────────────────────────────── */}
-      <header className="pt-36 pb-12 lg:pt-44 lg:pb-20 max-w-screen-2xl mx-auto px-6 lg:px-12">
+      <header className="pt-24 pb-12 lg:pt-32 lg:pb-20 max-w-screen-2xl mx-auto px-6 lg:px-12">
         <div className="flex flex-col md:flex-row md:items-end gap-8">
           <div className="max-w-2xl">
             <h1 className="font-serif text-6xl sm:text-7xl lg:text-8xl leading-tight text-[#1c1c19] mb-5">

@@ -75,7 +75,7 @@ export default function ContactContent() {
 
       <div className="bg-[#fdf9f4] min-h-screen">
         {/* ── Hero ──────────────────────────────── */}
-        <header className="pt-36 pb-16 lg:pt-44 lg:pb-24 max-w-screen-2xl mx-auto px-6 lg:px-12">
+        <header className="pt-24 pb-16 lg:pt-32 lg:pb-24 max-w-screen-2xl mx-auto px-6 lg:px-12">
           <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl text-[#1c1c19] leading-tight mb-5">
             Get in <span className="italic text-[#00527b]">Touch</span>
           </h1>
